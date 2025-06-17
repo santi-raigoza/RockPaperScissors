@@ -16,46 +16,48 @@ function getUserChoice() {
 
 
 function playRound(userChoice, computerChoice) {
+    let userWin = true;
+
     if (userChoice === computerChoice) {
-        console.log("Draw");
-    } else if (userChoice === "rock") {
-        if (computerChoice === "paper") {
-            computerScore += 1;
-        } else if (computerChoice === "scissor") {
-            humanScore += 1;
-        }
-    } else if (userChoice === "paper") {
-        if (computerChoice === "scissor") {
-            computerScore += 1;
-        } else if (computerChoice === "rock") {
-            humanScore += 1;
-        }
-    } else if (userChoice === "scissor") {
-        if (computerChoice === "rock") {
-            computerScore += 1;
-        } else if (computerChoice === "paper") {
-            humanScore += 1;
-        }
+        console.log("Draw!")
     } else {
-        console.log("Error during gameplay")
+        if (userChoice === "rock") {
+            userWin = computerChoice === "scissors" ? true : false;
+        } else if (userChoice === "paper") {
+            userWin = computerChoice === "rock" ? true : false;
+        } else if (userChoice === "scissor") {
+            userWin = computerChoice === "paper" ? true : false;
+        }
+
+        if (userWin) {
+            console.log("User won!");
+            humanScore += 1;
+        } else {
+            console.log("Computer won!");
+            computerScore += 1;
+        }
     }
-
 }
 
-const computerChoice = getComputerChoice();
-const userChoice = getUserChoice();
+function playGame() {
+    for (let i = 1; i <= 5; i++) {
+        const computerChoice = getComputerChoice();
+        const userChoice = getUserChoice();
 
-console.log(`User choice is: ${userChoice}`);
-console.log(`Computer choice is: ${computerChoice}`);
+        console.log(`Round ${i}: `);
+        console.log(`User choice is: ${userChoice}`);
+        console.log(`Computer choice is: ${computerChoice}`);
 
-playRound(userChoice, computerChoice);
-
-if (humanScore > computerScore) {
-    console.log("User wins!");
-} else if (computerScore > humanScore) {
-    console.log("Computer wins!");
+        playRound(userChoice, computerChoice);
+    }
 }
 
+// playRound(userChoice, computerChoice);
+playGame()
+
+console.log(`Final Score:
+Computer: ${computerScore}
+User: ${humanScore}`);
 
 
 
