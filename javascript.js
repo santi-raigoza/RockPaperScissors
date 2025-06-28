@@ -13,8 +13,6 @@ function getUserChoice() {
     return prompt("Rock, Paper, or Scissor?").toLowerCase();
 }
 
-
-
 function playRound(userChoice, computerChoice) {
     let userWin = true;
 
@@ -39,20 +37,19 @@ function playRound(userChoice, computerChoice) {
     }
 }
 
-function playGame() {
-    for (let i = 1; i <= 5; i++) {
-        const computerChoice = getComputerChoice();
-        const userChoice = getUserChoice();
+// function playGame() {
+//     for (let i = 1; i <= 5; i++) {
+//         const computerChoice = getComputerChoice();
+//         const userChoice = getUserChoice();
 
-        console.log(`Round ${i}: `);
-        console.log(`User choice is: ${userChoice}`);
-        console.log(`Computer choice is: ${computerChoice}`);
+//         console.log(`Round ${i}: `);
+//         console.log(`User choice is: ${userChoice}`);
+//         console.log(`Computer choice is: ${computerChoice}`);
 
-        playRound(userChoice, computerChoice);
-    }
-}
+//         playRound(userChoice, computerChoice);
+//     }
+// }
 
-// playRound(userChoice, computerChoice);
 playGame()
 
 console.log(`Final Score:

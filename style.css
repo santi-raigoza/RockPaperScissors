@@ -1,0 +1,29 @@
+:root {
+  --lightpink: #FFB6C1;
+}
+
+body,
+html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: var(--lightpink);
+    font-family: "Press Start 2p", Arial, Helvetica, sans-serif;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.score-counters {
+    display: flex;
+    flex-direction: row;
+}
