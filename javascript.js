@@ -7,10 +7,19 @@ function getComputerChoice() {
     return choices[Math.floor((Math.random()*3))];
 }
 
-// console.log(getComputerChoice());
+function getUserChoice(e) {
+    let target = e.target.closest('.Rock, .Paper, .Scissor');
 
-function getUserChoice() {
-    return prompt("Rock, Paper, or Scissor?").toLowerCase();
+    switch(target.className) {
+        case 'Rock':
+            return "rock";
+        case 'Paper':
+            return "paper";
+        case 'Scissor':
+            return "scissor";
+        default: 
+            return null;
+    }
 }
 
 function playRound(userChoice, computerChoice) {
@@ -20,7 +29,7 @@ function playRound(userChoice, computerChoice) {
         console.log("Draw!")
     } else {
         if (userChoice === "rock") {
-            userWin = computerChoice === "scissors" ? true : false;
+            userWin = computerChoice === "scissor" ? true : false;
         } else if (userChoice === "paper") {
             userWin = computerChoice === "rock" ? true : false;
         } else if (userChoice === "scissor") {
@@ -37,30 +46,31 @@ function playRound(userChoice, computerChoice) {
     }
 }
 
-// function playGame() {
-//     for (let i = 1; i <= 5; i++) {
-//         const computerChoice = getComputerChoice();
-//         const userChoice = getUserChoice();
+function playGame(e) {
+    const computerChoice = getComputerChoice();
+    const userChoice = getUserChoice(e);
 
-//         console.log(`Round ${i}: `);
-//         console.log(`User choice is: ${userChoice}`);
-//         console.log(`Computer choice is: ${computerChoice}`);
+    playRound(userChoice, computerChoice);
+    
+    if (humanScore === 5 || computerScore === 5) {
+        gameEnd(humanScore, computerScore);
+    }
 
-//         playRound(userChoice, computerChoice);
-//     }
-// }
+}
 
-playGame()
+function gameEnd(humanScore, computerScore) {
 
-console.log(`Final Score:
-Computer: ${computerScore}
-User: ${humanScore}`);
+    console.log(`Final Score:
+    Computer: ${computerScore}
+    User: ${humanScore}`);
 
+    if (humanScore > computerScore) {
+        console.log("You win the game!")
+    } else {
+        console.log("Computer wins the game :(")
+    }
 
+    document.removeEventListener("click", playGame);
+}
 
-
-
-
-
-
-
+document.addEventListener("click", playGame);
