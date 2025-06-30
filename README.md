@@ -11,7 +11,7 @@ A fun, interactive Rock-Paper-Scissors game built with **HTML**, **CSS**, and **
 
 ## 📸 Screenshot
 
-![Rock Paper Scissors Screenshot](screenshot.png)
+<img src="RPS.png" alt="Game Screenshot" width="500">
 
 ## 🛠️ Technologies Used
 
@@ -23,7 +23,7 @@ A fun, interactive Rock-Paper-Scissors game built with **HTML**, **CSS**, and **
 
 1. Clone the repository:
 2. Navigate to the project directory
-3. Open index.html in your browser or visit the live version of the game HERE.
+3. Open index.html in your browser or visit the live version of the game [HERE](https://santi-raigoza.github.io/RockPaperScissors/).
 
 ## File Structure
 
