@@ -2,8 +2,12 @@ choices = ["rock", "paper", "scissor"];
 
 let humanScore = 0;
 let computerScore = 0;
-let resultsDisplay = document.querySelector(".results");
 
+let humanScoreDisplay = document.getElementById("human-score-display");
+let computerScoreDisplay = document.getElementById("computer-score-display");
+
+const resultsDisplay = document.querySelector(".results");
+const middleDisplay = document.querySelector(".middle");
 
 function getComputerChoice() {
     return choices[Math.floor((Math.random()*3))];
@@ -25,10 +29,6 @@ function getUserChoice(e) {
 }
 
 function playRound(userChoice, computerChoice) {
-    let humanScoreDisplay = document.getElementById("human-score-display");
-    let computerScoreDisplay = document.getElementById("computer-score-display");
-    let currentDisplayValue = 0;
-    
     const resultsMessage = document.createElement("p");
     let choicesMessage = `User choice: ${userChoice}\tComputer choice: ${computerChoice}`
 
@@ -54,14 +54,12 @@ function playRound(userChoice, computerChoice) {
         if (userWin) {
             console.log(`${userWinMessage}`);
             humanScore += 1;
-            currentDisplayValue = parseInt(humanScoreDisplay.textContent);
-            humanScoreDisplay.textContent = currentDisplayValue + 1;
+            humanScoreDisplay.textContent = humanScore;
             resultsMessage.textContent = userWinMessage + "\t" + choicesMessage;
         } else {
             console.log(`${computerWinMessage}`);
             computerScore += 1;
-            currentDisplayValue = parseInt(computerScoreDisplay.textContent);
-            computerScoreDisplay.textContent = currentDisplayValue + 1;
+            computerScoreDisplay.textContent = computerScore;
             resultsMessage.textContent = computerWinMessage + "\t" + choicesMessage
         }
     }
@@ -70,28 +68,22 @@ function playRound(userChoice, computerChoice) {
 }
 
 function playGame(e) {
-    const computerChoice = getComputerChoice();
-    const userChoice = getUserChoice(e);
+    const button = e.target.closest("button.btn");
+    if (button) {
+        const computerChoice = getComputerChoice();
+        const userChoice = getUserChoice(e);
+        
+        playRound(userChoice, computerChoice);
+    }
 
-    playRound(userChoice, computerChoice);
-    
     if (humanScore === 5 || computerScore === 5) {
         gameEnd(humanScore, computerScore);
     }
 
 }
 
-// make it reset the results once u hit play again 
-// function playAgain() {
-
-// }
-
 function gameStart(e) {
-    const button = e.target.closest("button.btn");
-    if (button) {
-        playGame(e);
-    }
-
+    document.querySelector(".buttons").addEventListener("click", playGame);
 }
 
 function gameEnd(humanScore, computerScore) {
@@ -113,10 +105,36 @@ function gameEnd(humanScore, computerScore) {
 
     resultsDisplay.appendChild(gameEndMessage);
 
-    document.querySelector(".buttons").removeEventListener("click", gameStart);
+    document.querySelector(".buttons").removeEventListener("click", playGame);
 
-    // playAgain();
-    // might have to make it so a play again buttons appears instead bc idk if it would wait for the click
+    displayPlayAgain();
 }
 
-document.querySelector(".buttons").addEventListener("click", gameStart);
+function displayPlayAgain() {
+    const playAgainButton = document.createElement("button");
+    playAgainButton.textContent = "Play Again";
+    playAgainButton.classList.add("play-again-btn"); 
+    middleDisplay.appendChild(playAgainButton);
+
+    playAgainButton.addEventListener("click", function() {
+        playAgain(playAgainButton);
+    }, {once: true});
+}
+
+function playAgain(playAgainButton) {
+    console.log("Play Again");
+    resultsDisplay.innerHTML = "";
+    middleDisplay.removeChild(playAgainButton);
+    resetGameData();
+    gameStart();
+}
+
+function resetGameData() {
+    humanScore = 0;
+    humanScoreDisplay.textContent = 0;
+
+    computerScore = 0;
+    computerScoreDisplay.textContent = 0;
+}
+
+document.addEventListener("DOMContentLoaded", gameStart);

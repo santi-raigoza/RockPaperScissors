@@ -31,9 +31,8 @@ html {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* flex: 0.75; */
     padding-top: 100px;
-    gap: 60px;
+    gap: 30px;
 }
 
 .buttons {
@@ -83,4 +82,18 @@ html {
     border-radius: 25px;
     width: 120px;
     padding: 20px 30px;
+}
+
+.play-again-btn {
+    font-family: inherit;
+    font-size: 15px;
+    padding: 5px 10px;
+    border-radius: 25px;
+    cursor: pointer;
+    background-color: #777777;
+
+}
+
+.play-again-btn:hover {
+    opacity: 50%;
 }
