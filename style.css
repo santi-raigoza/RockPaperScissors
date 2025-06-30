@@ -31,7 +31,8 @@ html {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex: 0.75;
+    /* flex: 0.75; */
+    padding-top: 100px;
     gap: 60px;
 }
 

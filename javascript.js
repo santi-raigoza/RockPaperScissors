@@ -23,7 +23,14 @@ function getUserChoice(e) {
 }
 
 function playRound(userChoice, computerChoice) {
+    let humanScoreDisplay = document.getElementById("human-score-display");
+    let computerScoreDisplay = document.getElementById("computer-score-display");
+    let currentDisplayValue = 0;
+
     let userWin = true;
+
+    console.log(`User choice: ${userChoice}`);
+    console.log(`Computer choice: ${computerChoice}`);
 
     if (userChoice === computerChoice) {
         console.log("Draw!")
@@ -39,10 +46,15 @@ function playRound(userChoice, computerChoice) {
         if (userWin) {
             console.log("User won!");
             humanScore += 1;
+            currentDisplayValue = parseInt(humanScoreDisplay.textContent);
+            humanScoreDisplay.textContent = currentDisplayValue + 1;
         } else {
             console.log("Computer won!");
             computerScore += 1;
+            currentDisplayValue = parseInt(computerScoreDisplay.textContent);
+            computerScoreDisplay.textContent = currentDisplayValue + 1;
         }
+
     }
 }
 
@@ -58,6 +70,18 @@ function playGame(e) {
 
 }
 
+// function playAgain() {
+
+// }
+
+function gameStart(e) {
+    const button = e.target.closest("button.btn");
+    if (button) {
+        playGame(e);
+    }
+
+}
+
 function gameEnd(humanScore, computerScore) {
 
     console.log(`Final Score:
@@ -67,10 +91,12 @@ function gameEnd(humanScore, computerScore) {
     if (humanScore > computerScore) {
         console.log("You win the game!")
     } else {
-        console.log("Computer wins the game :(")
+        console.log("Computer wins the game")
     }
 
-    document.removeEventListener("click", playGame);
+    document.querySelector(".buttons").removeEventListener("click", gameStart);
+
+    // playAgain();
 }
 
-document.addEventListener("click", playGame);
+document.querySelector(".buttons").addEventListener("click", gameStart);
